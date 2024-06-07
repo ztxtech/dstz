@@ -12,14 +12,6 @@ evidence\_theory.evipiece.dual module
    :undoc-members:
    :show-inheritance:
 
-evidence\_theory.evipiece.multi module
---------------------------------------
-
-.. automodule:: evidence_theory.evipiece.multi
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 evidence\_theory.evipiece.single module
 ---------------------------------------
 
