@@ -14,8 +14,8 @@ def ds_rule(ev1, ev2, curItem=Element):
     the combined evidence.
 
     Args:
-        ev1 (Evidence): The first evidence as an instance of the Evidence class.
-        ev2 (Evidence): The second evidence as an instance of the Evidence class.
+        - ev1 (Evidence): The first evidence as an instance of the Evidence class.
+        - ev2 (Evidence): The second evidence as an instance of the Evidence class.
         curItem (callable): A callable that takes a set and returns an instance of Item. It defines
                             how to create items from set intersections.
 

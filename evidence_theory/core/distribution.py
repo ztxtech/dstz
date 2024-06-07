@@ -38,8 +38,8 @@ class Evidence(dict):
         value is a float.
 
         Args:
-            key: The key to set in the dictionary.
-            value: The value to associate with the key.
+            - key: The key to set in the dictionary.
+            - value: The value to associate with the key.
 
         Raises:
             TypeError: If the key is not an instance of Item or the value is not a float.
@@ -55,7 +55,7 @@ class Evidence(dict):
         Retrieves an item from the dictionary, ensuring that the key is an instance of Item.
 
         Args:
-            item: The key whose associated value is to be returned.
+            - item: The key whose associated value is to be returned.
 
         Returns:
             float: The value associated with the given key.

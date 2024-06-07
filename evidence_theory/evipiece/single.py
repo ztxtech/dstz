@@ -9,7 +9,7 @@ def pignistic_probability_transformation(ev):
     Transforms an evidence distribution into a probability distribution using the Pignistic transformation.
 
     Args:
-        ev (Evidence): An evidence distribution as an instance of the Evidence class.
+        - ev (Evidence): An evidence distribution as an instance of the Evidence class.
 
     Returns:
         Evidence: A new evidence distribution transformed into a probability distribution.
@@ -37,8 +37,8 @@ def deng_entropy(ev, base=2):
     Calculates the Deng entropy of an evidence distribution.
 
     Args:
-        ev (Evidence): An evidence distribution as an instance of the Evidence class.
-        base (int, optional): The logarithmic base to use for entropy calculation. Defaults to 2.
+        - ev (Evidence): An evidence distribution as an instance of the Evidence class.
+        - base (int, optional): The logarithmic base to use for entropy calculation. Defaults to 2.
 
     Returns:
         float: The Deng entropy of the evidence distribution.

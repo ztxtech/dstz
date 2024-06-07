@@ -44,7 +44,7 @@ class Item(ABC):
         specified in the idattr property.
 
         Args:
-            other (Any): The object to compare this item against.
+            - other (Any): The object to compare this item against.
 
         Returns:
             bool: True if the objects are equal, False otherwise.
@@ -89,7 +89,7 @@ class Element(Item):
         Initialize an Element instance with a given value.
 
         Args:
-            value (Any, optional): The initial value of the Element. Defaults to None.
+            - value (Any, optional): The initial value of the Element. Defaults to None.
         """
         super(Element, self).__init__()
         self.value = value
