@@ -41,3 +41,61 @@ def ds_rule(ev1, ev2, curItem=Element):
         for key in res.keys():
             res[key] = res[key] / (1 - empty_mass)
     return res
+
+
+def disjunctive_rule(ev1, ev2, curItem=Element):
+    """
+    Combines two evidence distributions using the disjunctive rule of combination.
+
+    Args:
+        - ev1 (Evidence): The first evidence distribution as an instance of the Evidence class.
+        - ev2 (Evidence): The second evidence distribution as an instance of the Evidence class.
+        - curItem (callable, optional): A callable that takes a set and returns an instance of Item.
+                                      Defaults to the Element class.
+
+    Returns:
+        Evidence: A new evidence distribution representing the combination of ev1 and ev2 using the
+                  disjunctive rule of combination.
+
+    Description:
+        The disjunctive rule of combination is applied to merge two evidence distributions by
+        considering only the intersection of the focal elements of each distribution. The resulting
+        distribution assigns a mass to each possible intersection of focal elements from ev1 and ev2.
+    """
+    res = Evidence()
+    for key1, key2 in itertools.product(ev1.keys(), ev2.keys()):
+        key = curItem(key1.value.intersection(key2.value))
+        if key in res:
+            res[key] += ev1[key1] * ev2[key2]
+        else:
+            res[key] = ev1[key1] * ev2[key2]
+    return res
+
+
+def conjunctive_rule(ev1, ev2, curItem=Element):
+    """
+    Combines two evidence distributions using the conjunctive rule of combination.
+
+    Args:
+        - ev1 (Evidence): The first evidence distribution as an instance of the Evidence class.
+        - ev2 (Evidence): The second evidence distribution as an instance of the Evidence class.
+        - curItem (callable, optional): A callable that takes a set and returns an instance of Item.
+                                      Defaults to the Element class.
+
+    Returns:
+        Evidence: A new evidence distribution representing the combination of ev1 and ev2 using the
+                  conjunctive rule of combination.
+
+    Description:
+        The conjunctive rule of combination is applied to merge two evidence distributions by
+        considering the union of the focal elements of each distribution. The resulting distribution
+        assigns a mass to each possible union of focal elements from ev1 and ev2.
+    """
+    res = Evidence()
+    for key1, key2 in itertools.product(ev1.keys(), ev2.keys()):
+        key = curItem(key1.value.union(key2.value))
+        if key in res:
+            res[key] += ev1[key1] * ev2[key2]
+        else:
+            res[key] = ev1[key1] * ev2[key2]
+    return res
