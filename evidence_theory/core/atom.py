@@ -68,3 +68,65 @@ class Item(ABC):
                 value = frozenset(value)
             attrs.append(value)
         return hash(tuple(attrs))
+
+
+class Element(Item):
+    """
+    A class representing an element with a specific value.
+
+    Attributes:
+        value (Any): The value of the element.
+
+    Methods:
+        __init__(self, value=None): Constructor for the Element class.
+        idattr (property): Property specifying the identifier attribute of the Element.
+        __str__(self): Returns a string representation of the Element.
+        __repr__(self): Returns a string representation of the Element.
+    """
+
+    def __init__(self, value=None):
+        """
+        Initialize an Element instance with a given value.
+
+        Args:
+            value (Any, optional): The initial value of the Element. Defaults to None.
+        """
+        super(Element, self).__init__()
+        self.value = value
+
+    @property
+    def idattr(self):
+        """
+        Property specifying the identifier attribute of the Element.
+
+        Returns:
+            list: A list containing the name of the identifier attribute ('value').
+        """
+        return ['value']
+
+    def __str__(self):
+        """
+        Return a string representation of the Element.
+
+        Returns:
+            str: String representation of the Element's value.
+        """
+        return str(self.value)
+
+    def __repr__(self):
+        """
+        Return a string representation of the Element suitable for debugging.
+
+        Returns:
+            str: String representation of the Element's value.
+        """
+        return self.__str__()
+
+    def __len__(self):
+        """
+        Return the length of the value attribute.
+
+        Returns:
+            int: The length of the value attribute.
+        """
+        return len(self.value)

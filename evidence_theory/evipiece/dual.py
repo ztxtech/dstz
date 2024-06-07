@@ -1,9 +1,10 @@
 import itertools
 
+from evidence_theory.core.atom import Element
 from evidence_theory.core.distribution import Evidence
 
 
-def ds_rule(ev1, ev2, curItem):
+def ds_rule(ev1, ev2, curItem=Element):
     """
     Applies the Dempster-Shafer rule of combination on two evidences.
 
