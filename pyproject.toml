@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "evidence_thoery"
-version = "0.0.3"
-authors = [{name = "Tianxiang Zhan", email = "zhantianxianguestc@hotmail.com"}]
+version = "0.0.4"
+authors = [{ name = "Tianxiang Zhan", email = "zhantianxianguestc@hotmail.com" }]
 description = "A python package of evidence theory"
 readme = "README.md"
 requires-python = ">=3.7"
