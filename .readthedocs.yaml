@@ -1,9 +1,10 @@
 # .readthedocs.yml
 version: 2
 
-# 设置构建的Python版本
-python:
-  version: 3.8 # 根据你的项目需求选择合适的Python版本
+build:
+  os: ubuntu-22.04
+  tools:
+    python: "3.9"
 
 # 安装要求，这里列出需要通过pip安装的所有依赖
 install:
