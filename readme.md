@@ -38,3 +38,27 @@ pip install evidence_theory
 
 ## 致谢
 感谢所有贡献者和社区成员的帮助和支持。
+
+## 相关论文
+本软件包的编程思想基于Zhan等人的论文，如果涉及相关内容，请引用相关文献。
+
+```bibtex
+@article{zhan2024generalized,
+  title={Generalized information entropy and generalized information dimension},
+  author={Zhan, Tianxiang and Zhou, Jiefeng and Li, Zhen and Deng, Yong},
+  journal={Chaos, Solitons \& Fractals},
+  volume={184},
+  pages={114976},
+  year={2024},
+  publisher={Elsevier}
+}
+```
+
+```bibtex
+@article{zhan2024random,
+  title={Random Graph Set and Evidence Pattern Reasoning Model},
+  author={Zhan, Tianxiang and Li, Zhen and Deng, Yong},
+  journal={arXiv preprint arXiv:2402.13058},
+  year={2024}
+}
+```
