@@ -5,11 +5,9 @@ build:
   os: ubuntu-22.04
   tools:
     python: "3.9"
-
-# 安装要求，这里列出需要通过pip安装的所有依赖
-install:
-  - pip install -r requirements.txt # 假设你的项目有一个requirements.txt文件列出了所有依赖
-  - pip install sphinx_rtd_theme # 明确指定安装sphinx_rtd_theme
+  jobs:
+    pre_install:
+     - pip install sphinx_rtd_theme
 
 # 构建配置
 sphinx:
