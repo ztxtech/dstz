@@ -23,7 +23,7 @@ pip install evidence_theory
 
 ## 例子
 
-见`./example/conflict_example.py`中实现了一个经典的证据冲突的融合。
+见[`./example/conflict_example.py`](https://github.com/ztxtech/evidence_theory/blob/main/example/conflict_example.py)中实现了一个经典的证据冲突的融合。
 
 ## 文档
 完整的[API文档](https://evidence-theory.readthedocs.io/)和使用指南可在项目主页上找到。
