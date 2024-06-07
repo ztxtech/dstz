@@ -1,4 +1,4 @@
-from evidence.core.atom import Item
+from evidence_theory.core.atom import Item
 
 
 class Evidence(dict):

@@ -1,6 +1,6 @@
 import itertools
 
-from evidence.core.distribution import Evidence
+from evidence_theory.core.distribution import Evidence
 
 
 def ds_rule(ev1, ev2, curItem):
