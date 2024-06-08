@@ -1,6 +1,14 @@
 evidence\_theory.math package
 =============================
 
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   evidence_theory.math.stat
+
 Submodules
 ----------
 
