@@ -28,6 +28,8 @@ pip install evidence_theory
   中实现了一个pignistic probability transformation。
 - 见[`./example/moment.py`](https://github.com/ztxtech/evidence_theory/blob/main/example/moment.py)
   中实现了一个计算证据对应的矩的例子。
+- 见[`./example/space_example.py`](https://github.com/ztxtech/evidence_theory/blob/main/example/space_example.py)
+  中实现了一个计算证据对应的矩的例子。
 
 ## 文档
 
