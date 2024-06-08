@@ -8,8 +8,8 @@ Subpackages
    :maxdepth: 4
 
    evidence_theory.core
-   evidence_theory.element
-   evidence_theory.evipiece
+   evidence_theory.evpiece
+   evidence_theory.math
 
 Module contents
 ---------------
