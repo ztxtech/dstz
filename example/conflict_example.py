@@ -1,6 +1,6 @@
 from evidence_theory.core.atom import Element
 from evidence_theory.core.distribution import Evidence
-from evidence_theory.evipiece.dual import ds_rule
+from evidence_theory.evpiece.dual import ds_rule
 
 # Create an instance of Evidence with some predefined elements and their masses
 e1 = Evidence()

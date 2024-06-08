@@ -1,7 +1,7 @@
 # Import necessary classes and functions from the evidence theory package
 from evidence_theory.core.atom import Element
 from evidence_theory.core.distribution import Evidence
-from evidence_theory.evipiece.single import pignistic_probability_transformation, deng_entropy
+from evidence_theory.evpiece.single import pignistic_probability_transformation, deng_entropy
 
 # Create an instance of Evidence with a single belief assignment over a set of elements {A, B, C}
 ev = Evidence()
