@@ -1,25 +1,3 @@
-# from evidence_theory.core.atom import Element
-# from evidence_theory.core.distribution import Evidence
-# from evidence_theory.element.combination import simple_space, powerset
-#
-#
-# def max_entropy_distribution(n, simple_generator, event_generator,
-#                              component_generator=set, condition_func=None):
-#     res = Evidence()
-#     ss = simple_generator(n)
-#     es = event_generator(ss)
-#
-#     for element in es:
-#         res[Element(element)] = float(len(condition_func(event_generator(component_generator(element)))) \
-#                                           if condition_func else len(event_generator(component_generator(element))))
-#     states = sum(res.values())
-#     for element in es:
-#         res[Element(element)] /= states
-#     return res
-#
-#
-# def max_deng_entropy_distribution(n):
-#     return max_entropy_distribution(n, simple_space, powerset)
 from evidence_theory.core.atom import Element
 from evidence_theory.core.distribution import Evidence
 from evidence_theory.element.combination import simple_space, powerset

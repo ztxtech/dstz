@@ -1,5 +1,7 @@
 import math
 
+from evidence_theory.element.combination import powerset
+
 
 def high_order_moment(ev, func, order, *args):
     """
@@ -62,7 +64,8 @@ def information_var(ev):
     return high_order_moment(ev, central_information_content, 2, ev)
 
 
-def information_content(element, mass):
+def information_content(element, mass, event_generator=powerset,
+                        component_generator=set):
     """
     Calculates the information content associated with an element and its mass in an evidence distribution.
 
@@ -79,7 +82,7 @@ def information_content(element, mass):
         of possible combinations minus one. This measure is often used in information theory to assess
         the informativeness of a particular piece of evidence.
     """
-    return -math.log2(mass / (2 ** len(element.value) - 1))
+    return -math.log2(mass / len(event_generator(component_generator(element))))
 
 
 def central_information_content(element, mass, ev):

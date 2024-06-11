@@ -1,5 +1,3 @@
-import math
-
 from evidence_theory.core.atom import Element
 from evidence_theory.core.distribution import Evidence
 
@@ -29,28 +27,4 @@ def pignistic_probability_transformation(ev):
                 res[Element({s_item})] += ev[key] / len(key.value)
             else:
                 res[Element({s_item})] = ev[key] / len(key.value)
-    return res
-
-
-def deng_entropy(ev, base=2):
-    """
-    Calculates the Deng entropy of an evidence distribution.
-
-    Args:
-        - ev (Evidence): An evidence distribution as an instance of the Evidence class.
-        - base (int, optional): The logarithmic base to use for entropy calculation. Defaults to 2.
-
-    Returns:
-        float: The Deng entropy of the evidence distribution.
-
-    Description:
-        This function calculates the Deng entropy of an evidence distribution, which is a measure
-        of uncertainty or randomness within the distribution. The Deng entropy is calculated by
-        summing the negative log (to the specified base) of the ratio of each BBA mass to the total
-        number of possible combinations minus one, weighted by the BBA mass itself.
-    """
-    res = 0
-    for key in ev:
-        inf_content = -ev[key] * math.log(ev[key] / (2 ** len(key) - 1), base)
-        res += inf_content
     return res
