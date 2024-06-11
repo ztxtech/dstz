@@ -130,3 +130,13 @@ class Element(Item):
             int: The length of the value attribute.
         """
         return len(self.value)
+
+    def __iter__(self):
+        """
+        Make the Element iterable if its value is iterable.
+
+        Yields:
+            Any: Yields the next item from the value if it's iterable; otherwise, does nothing.
+        """
+        if hasattr(self.value, '__iter__') and not isinstance(self.value, str):
+            yield from self.value

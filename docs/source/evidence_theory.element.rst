@@ -12,6 +12,14 @@ evidence\_theory.element.combination module
    :undoc-members:
    :show-inheritance:
 
+evidence\_theory.element.permutation module
+-------------------------------------------
+
+.. automodule:: evidence_theory.element.permutation
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Module contents
 ---------------
 
