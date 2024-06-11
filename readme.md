@@ -30,6 +30,8 @@ pip install evidence_theory
   中实现了一个计算证据对应的矩的例子。
 - 见[`./example/space_example.py`](https://github.com/ztxtech/evidence_theory/blob/main/example/space_example.py)
   中实现了一个计算证据对应的矩的例子。
+- 见[`./example/rps_example.py`](https://github.com/ztxtech/evidence_theory/blob/main/example/space_example.py)
+  中实现了随机排列集左交融合的例子。
 
 ## 文档
 

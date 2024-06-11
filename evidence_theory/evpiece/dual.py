@@ -99,3 +99,50 @@ def conjunctive_rule(ev1, ev2, curItem=Element):
         else:
             res[key] = ev1[key1] * ev2[key2]
     return res
+
+
+def rps_left_rule(ev1, ev2, curItem=Element):
+    """
+    Apply the Left-Rule of combination in the context of Relative Proof Strength (RPS) Theory to combine two pieces of evidence.
+
+    Args:
+    - ev1 (Evidence): The first evidence object containing elements (keys) with associated probabilities (values).
+    - ev2 (Evidence): The second evidence object to be combined with the first, structured similarly to `ev1`.
+    - curItem (class, optional): The class used to instantiate new elements for the resulting evidence set.
+                               Defaults to `Element`.
+
+    Returns:
+    - Evidence: A new Evidence instance representing the combined evidence after applying the Left-Rule.
+
+    Description:
+    This function combines two evidence objects (`ev1` and `ev2`) using the Left-Rule, which involves finding the
+    intersection of keys (events) from both evidences and multiplying their corresponding probabilities. The result
+    maintains the order and duplicates from `ev1`. The `left_intersection` function is defined locally to compute
+    these intersections. The combined evidence values are summed for intersecting keys in the resulting evidence set.
+
+    Example Usage:
+    >>> ev1 = Evidence({Element((1,)): 0.6, Element((2,)): 0.4})
+    >>> ev2 = Evidence({Element((1,)): 0.7, Element((3,)): 0.3})
+    >>> combined_ev = rps_left_rule(ev1, ev2)
+    >>> print(combined_ev)
+    // Output will reflect the combined evidence based on the Left-Rule.
+    """
+    res = Evidence()
+    for key1, key2 in itertools.product(ev1.keys(), ev2.keys()):
+        def left_intersection(a, b):
+            # Local function to compute the intersection, preserving duplicates from 'a'
+            res = list(a)
+            for i in set(a) - set(b).intersection(set(a)):
+                res.remove(i)
+            return tuple(res)
+
+        # Create a new key using the intersection of values from ev1 and ev2
+        key = curItem(left_intersection(key1.value, key2.value))
+
+        # Combine the probabilities for intersecting keys
+        if key in res:
+            res[key] += ev1[key1] * ev2[key2]
+        else:
+            res[key] = ev1[key1] * ev2[key2]
+
+    return res
