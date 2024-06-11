@@ -7,7 +7,7 @@ def permutation_set(simple_space, allow_empty=False):
     """
     Generates all permutations of all possible non-empty subsets from a given simple space.
 
-    Parameters:
+    Args:
     - simple_space (set): The input set from which permutations of subsets are generated.
     - allow_empty (bool, optional): Determines whether to include permutations of the empty set in the result.
                                   Defaults to False.

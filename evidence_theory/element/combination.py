@@ -7,7 +7,7 @@ def simple_space(n):
     """
     Generates a set representing a simple space of elements.
 
-    Parameters:
+    Args:
     - n (int): The number of elements in the simple space.
 
     Returns:
@@ -25,7 +25,7 @@ def powerset(simple_space, allow_empty=False):
     """
     Generates the power set of a given simple space.
 
-    Parameters:
+    Args:
     - simple_space (set): The input set for which to generate the power set.
     - allow_empty (bool, optional): A flag indicating whether to include the empty set in the power set.
                                   Defaults to False.
