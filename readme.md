@@ -32,6 +32,9 @@ pip install evidence_theory
   中实现了一个计算证据对应的矩的例子。
 - 见[`./example/rps_example.py`](https://github.com/ztxtech/evidence_theory/blob/main/example/space_example.py)
   中实现了随机排列集左交融合的例子。
+- 见[`./example/wang_orthogonal_example.py`](https://github.com/ztxtech/evidence_theory/blob/main/example/space_example.py)
+中实现了论文`Wang, Y., Li, Z., & Deng, Y. (2024). A new orthogonal sum in Random Permutation Set. Fuzzy Sets and Systems, 109034`
+中的正交rps融合规则。
 
 ## 文档
 

@@ -2,6 +2,7 @@ import itertools
 
 from evidence_theory.core.atom import Element
 from evidence_theory.core.distribution import Evidence
+from evidence_theory.element.permutation import order_code_intersection
 
 
 def ds_rule(ev1, ev2, curItem=Element):
@@ -145,4 +146,46 @@ def rps_left_rule(ev1, ev2, curItem=Element):
         else:
             res[key] = ev1[key1] * ev2[key2]
 
+    return res
+
+
+def wang_orthogonal_rule(ev1, ev2, curItem=Element):
+    """
+    Applies the Wang Orthogonal Rule, as introduced in the research paper: Wang, Y., Li, Z., & Deng, Y. (2024).
+    A new orthogonal sum in Random Permutation Set. Fuzzy Sets and Systems, 109034, to combine two evidence sets.
+
+    This advanced combination rule is specifically tailored for scenarios involving random permutation sets and aims to
+    address the challenge of aggregating evidential information where the order of elements matters. It leverages the
+    `order_code_intersection` function to identify intersecting codes (permutations) between the focal elements of `ev1`
+    and `ev2`, ensuring a structured combination that respects the inherent ordering in the evidence.
+
+    Args:
+    - ev1 (Evidence): The first evidence set, an instance of `Evidence` class, encapsulating elements and their associated belief degrees.
+    - ev2 (Evidence): The second evidence set, structured similarly to `ev1`, to be combined orthogonally with `ev1`.
+    - curItem (callable, optional): A callable that transforms a code (e.g., index or permutation) into an `Element` instance.
+                                    Defaults to `Element`.
+
+    Returns:
+    - Evidence: A new `Evidence` instance representing the combined belief degrees after applying the Wang Orthogonal Rule.
+                The keys of this new evidence set are derived from the ordered intersections of `ev1` and `ev2`.
+
+    Description:
+    The process involves iterating over all pairs of keys (representing sets of codes or permutations) from `ev1` and `ev2`.
+    For each pair, it calculates the ordered intersection of their codes using `order_code_intersection`. These intersections
+    form the basis for combination, where each intersecting code is transformed into an `Element` using `curItem`. The belief
+    degrees associated with the intersecting pairs from `ev1` and `ev2` are then combined through multiplication. To correctly
+    distribute the combined belief across potentially multiple intersecting codes, the product is divided by the count of these
+    intersecting codes (`len(cur_keys)`), ensuring a consistent probabilistic interpretation across the combined evidence set.
+
+    The method provides a sophisticated tool for handling evidence fusion in contexts where permutations carry meaningful
+    information about the state space, aligning with the theoretical advancements proposed in the referenced publication.
+    """
+    res = Evidence()
+    for key1, key2 in itertools.product(ev1.keys(), ev2.keys()):
+        cur_keys = [curItem(key) for key in order_code_intersection(key1.value, key2.value)]
+        for key in cur_keys:
+            if key in res:
+                res[key] += ev1[key1] * ev2[key2] / len(cur_keys)
+            else:
+                res[key] = ev1[key1] * ev2[key2] / len(cur_keys)
     return res
