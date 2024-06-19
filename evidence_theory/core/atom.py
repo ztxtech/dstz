@@ -7,20 +7,21 @@ class Item(ABC):
     Abstract base class for items that can be uniquely identified and hashed based on certain attributes.
 
     Attributes:
-        _value (Any): An internal attribute that may be used by subclasses.
+        - _value (Any): An internal attribute that may be used by subclasses.
 
     Methods:
-        __init__(): Initializes an instance of the Item class with an internal _value attribute set to None.
+        - __init__(): Initializes an instance of the Item class with an internal _value attribute set to None.
 
-        idattr (property): An abstract property that must be implemented by subclasses to specify
+        - idattr (property): An abstract property that must be implemented by subclasses to specify
                            the attribute(s) that uniquely identify an instance of the class.
 
-        __eq__(other: Any) -> bool: Compares this item with another object for equality based on the
+        - __eq__(other: Any) -> bool: Compares this item with another object for equality based on the
                                     values of the attributes specified in the idattr property.
 
-        __hash__() -> int: Computes a hash value for the item based on the values of the attributes
+        - __hash__() -> int: Computes a hash value for the item based on the values of the attributes
                            specified in the idattr property. Non-hashable values are converted to
                            a frozenset before hashing.
+
     """
 
     def __init__(self):
@@ -75,13 +76,13 @@ class Element(Item):
     A class representing an element with a specific value.
 
     Attributes:
-        value (Any): The value of the element.
+        - value (Any): The value of the element.
 
     Methods:
-        __init__(self, value=None): Constructor for the Element class.
-        idattr (property): Property specifying the identifier attribute of the Element.
-        __str__(self): Returns a string representation of the Element.
-        __repr__(self): Returns a string representation of the Element.
+        - __init__(self, value=None): Constructor for the Element class.
+        - idattr (property): Property specifying the identifier attribute of the Element.
+        - __str__(self): Returns a string representation of the Element.
+        - __repr__(self): Returns a string representation of the Element.
     """
 
     def __init__(self, value=None):

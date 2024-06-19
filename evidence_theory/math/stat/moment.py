@@ -11,7 +11,7 @@ def high_order_moment(ev, func, order, *args):
         - ev (Evidence): An instance of the Evidence class representing the evidence distribution.
         - func (callable): A function that takes an element and its mass (and possibly additional arguments) and returns a numerical value.
         - order (int): The order of the moment to calculate.
-        - *args: Additional arguments to pass to the function `func`.
+        - \*args: Additional arguments to pass to the function `func`.
 
     Returns:
         float: The high-order moment of the given function applied to the evidence distribution.

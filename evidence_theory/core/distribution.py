@@ -7,13 +7,13 @@ class Evidence(dict):
     and values are floats representing the strength or relevance of the evidence.
 
     Methods:
-        __init__(*args, **kwargs): Initializes the Evidence dictionary, validating that keys are
+        - __init__(\*args, \*\*kwargs): Initializes the Evidence dictionary, validating that keys are
                                    instances of Item and values are floats.
 
-        __setitem__(key, value): Sets an item in the dictionary, validating that the key is an
+        - __setitem__(key, value): Sets an item in the dictionary, validating that the key is an
                                  instance of Item and the value is a float.
 
-        __getitem__(item): Retrieves an item from the dictionary, ensuring that the key is an
+        - __getitem__(item): Retrieves an item from the dictionary, ensuring that the key is an
                            instance of Item.
     """
 
