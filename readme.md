@@ -38,7 +38,7 @@ pip install dstz
 
 ## 文档
 
-完整的[API文档](https://dst.readthedocs.io/)和使用指南可在项目主页上找到。
+完整的[API文档](https://dstz.readthedocs.io/)和使用指南可在项目主页上找到。
 
 ## 支持与交流
 
