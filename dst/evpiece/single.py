@@ -1,5 +1,7 @@
 from evidence_theory.core.atom import Element
 from evidence_theory.core.distribution import Evidence
+from evidence_theory.evpiece.dual import disjunctive_rule
+from evidence_theory.math.func import pl
 
 
 def pignistic_probability_transformation(ev):
@@ -28,3 +30,34 @@ def pignistic_probability_transformation(ev):
             else:
                 res[Element({s_item})] = ev[key] / len(key.value)
     return res
+
+
+def get_fod(ev):
+    res = set()
+    for ele in ev.keys():
+        for item in ele.value:
+            res.add(item)
+    return res
+
+
+def shafer_discounting(ev, alpha):
+    ev_tmp = Evidence()
+    ev_tmp[Element(set())] = 1 - alpha
+    ev_tmp[Element(get_fod(ev))] = alpha
+    res = disjunctive_rule(ev, ev_tmp)
+    return res
+
+
+def contour_transformation(ev):
+    fod = get_fod(ev)
+    res = Evidence()
+    for event in fod:
+        res[Element({event})] = pl(Element({event}), ev)
+    return res
+
+
+ev = Evidence()
+ev[Element({'a', 'b', 'c'})] = 0.5
+ev[Element({'b', 'c'})] = 0.3
+ev[Element({'a'})] = 0.2
+print(contour_transformation(ev))

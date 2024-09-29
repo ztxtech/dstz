@@ -16,7 +16,7 @@ def pl(element, ev):
     """
     res = 0
     for key in ev:
-        if element.value.intersects(key.value):
+        if element.value.intersection(key.value):
             res += ev[key]
     return res
 
