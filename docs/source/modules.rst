@@ -1,7 +1,7 @@
-evidence_theory
+dstz
 ===============
 
 .. toctree::
    :maxdepth: 4
 
-   evidence_theory
+   dstz
