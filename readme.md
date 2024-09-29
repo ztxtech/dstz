@@ -6,18 +6,18 @@
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![GitHub Repository](https://img.shields.io/badge/repository-GitHub-blue.svg)](https://github.com/ztxtech/evidence_theory)
 [![GitHub Issues](https://img.shields.io/github/issues/ztxtech/evidence_theory.svg)](https://github.com/ztxtech/evidence_theory/issues)
-[![Documentation Status](https://readthedocs.org/projects/evidence-theory/badge/?version=latest)](https://evidence-theory.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/dst/badge/?version=latest)](https://dst.readthedocs.io/en/latest/?badge=latest)
 
 ## 简介
 
-`evidence_theory`是一个用于证据理论的Python包，提供了一系列工具和函数，帮助用户处理和应用证据理论。
+`dst`是一个用于证据理论的Python包，提供了一系列工具和函数，帮助用户处理和应用证据理论。
 
 ## 安装
 
-使用`pip`安装`evidence_theory`:
+使用`pip`安装`dst`:
 
 ```bash
-pip install evidence_theory
+pip install dst
 ```
 
 ## 例子
@@ -38,7 +38,7 @@ pip install evidence_theory
 
 ## 文档
 
-完整的[API文档](https://evidence-theory.readthedocs.io/)和使用指南可在项目主页上找到。
+完整的[API文档](https://dst.readthedocs.io/)和使用指南可在项目主页上找到。
 
 ## 支持与交流
 
