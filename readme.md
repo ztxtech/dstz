@@ -1,38 +1,38 @@
-# evidence_theory
+# dstz
 
 ![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-green)
-[![Python](https://img.shields.io/badge/PyPI-3670A0?logo=PyPI&logoColor=ffdd54)](https://pypi.org/project/evidence-thoery/)
+[![Python](https://img.shields.io/badge/PyPI-3670A0?logo=PyPI&logoColor=ffdd54)](https://pypi.org/project/dstz/)
 [![Python Version](https://img.shields.io/badge/python-%3E%3D3.7-blue.svg)](https://www.python.org/downloads/)
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![GitHub Repository](https://img.shields.io/badge/repository-GitHub-blue.svg)](https://github.com/ztxtech/evidence_theory)
-[![GitHub Issues](https://img.shields.io/github/issues/ztxtech/evidence_theory.svg)](https://github.com/ztxtech/evidence_theory/issues)
+[![GitHub Repository](https://img.shields.io/badge/repository-GitHub-blue.svg)](https://github.com/ztxtech/dstz)
+[![GitHub Issues](https://img.shields.io/github/issues/ztxtech/dstz.svg)](https://github.com/ztxtech/dstz/issues)
 [![Documentation Status](https://readthedocs.org/projects/dst/badge/?version=latest)](https://dst.readthedocs.io/en/latest/?badge=latest)
 
 ## 简介
 
-`dst`是一个用于证据理论的Python包，提供了一系列工具和函数，帮助用户处理和应用证据理论。
+`dstz`是一个用于证据理论的Python包，提供了一系列工具和函数，帮助用户处理和应用证据理论。
 
 ## 安装
 
-使用`pip`安装`dst`:
+使用`pip`安装`dstz`:
 
 ```bash
-pip install dst
+pip install dstz
 ```
 
 ## 例子
 
-- 见[`./example/conflict_example.py`](https://github.com/ztxtech/evidence_theory/blob/main/example/conflict_example.py)
+- 见[`./example/conflict_example.py`](https://github.com/ztxtech/dstz/blob/main/example/conflict_example.py)
   中实现了一个经典的证据冲突的融合。
-- 见[`./example/ppt.py`](https://github.com/ztxtech/evidence_theory/blob/main/example/ppt.py)
+- 见[`./example/ppt.py`](https://github.com/ztxtech/dstz/blob/main/example/ppt.py)
   中实现了一个pignistic probability transformation。
-- 见[`./example/moment.py`](https://github.com/ztxtech/evidence_theory/blob/main/example/moment.py)
+- 见[`./example/moment.py`](https://github.com/ztxtech/dstz/blob/main/example/moment.py)
   中实现了一个计算证据对应的矩的例子。
-- 见[`./example/space_example.py`](https://github.com/ztxtech/evidence_theory/blob/main/example/space_example.py)
+- 见[`./example/space_example.py`](https://github.com/ztxtech/dstz/blob/main/example/space_example.py)
   中实现了一个计算证据对应的矩的例子。
-- 见[`./example/rps_example.py`](https://github.com/ztxtech/evidence_theory/blob/main/example/rps_example.py)
+- 见[`./example/rps_example.py`](https://github.com/ztxtech/dstz/blob/main/example/rps_example.py)
   中实现了随机排列集左交融合的例子。
-- 见[`./example/wang_orthogonal_example.py`](https://github.com/ztxtech/evidence_theory/blob/main/example/wang_orthogonal_example.py)
+- 见[`./example/wang_orthogonal_example.py`](https://github.com/ztxtech/dstz/blob/main/example/wang_orthogonal_example.py)
 中实现了论文[`Wang, Y., Li, Z., & Deng, Y. (2024). A new orthogonal sum in Random Permutation Set. Fuzzy Sets and Systems, 109034`](https://doi.org/10.1016/j.fss.2024.109034)
 中的正交rps融合规则。
 

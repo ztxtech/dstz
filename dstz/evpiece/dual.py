@@ -1,8 +1,8 @@
 import itertools
 
-from dst.core.atom import Element
-from dst.core.distribution import Evidence
-from dst.element.permutation import order_code_intersection
+from dstz.core.atom import Element
+from dstz.core.distribution import Evidence
+from dstz.element.permutation import order_code_intersection
 
 
 def ds_rule(ev1, ev2, curItem=Element):

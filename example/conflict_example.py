@@ -1,6 +1,6 @@
-from dst.core.atom import Element
-from dst.core.distribution import Evidence
-from dst.evpiece.dual import ds_rule
+from dstz.core.atom import Element
+from dstz.core.distribution import Evidence
+from dstz.evpiece.dual import ds_rule
 
 # Create an instance of Evidence with some predefined elements and their masses
 e1 = Evidence()

@@ -1,6 +1,6 @@
-from dst.core.atom import Element
-from dst.core.distribution import Evidence
-from dst.math.stat.moment import deng_entropy, information_var
+from dstz.core.atom import Element
+from dstz.core.distribution import Evidence
+from dstz.math.stat.moment import deng_entropy, information_var
 
 # Define an evidence distribution with assigned masses for each piece of evidence.
 ev = {

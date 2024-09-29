@@ -3,7 +3,7 @@ requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "dst"
+name = "dstz"
 version = "0.0.1"
 authors = [{ name = "Tianxiang Zhan", email = "zhantianxianguestc@hotmail.com" }]
 description = "A python package of evidence theory"
@@ -16,8 +16,8 @@ classifiers = [
 ]
 
 [project.urls]
-homepage = "https://github.com/ztxtech/dst"
-repository = "https://github.com/ztxtech/dst.git"
+homepage = "https://github.com/ztxtech/dstz"
+repository = "https://github.com/ztxtech/dstz.git"
 
 # 如果有依赖项，可以在下面添加
 #[project.dependencies]

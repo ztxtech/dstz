@@ -1,1 +1,1 @@
-sphinx-apidoc -o source ../dst
+sphinx-apidoc -o source ../dstz

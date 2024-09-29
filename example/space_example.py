@@ -1,6 +1,6 @@
-from dst.element.combination import simple_space, powerset
-from dst.element.permutation import permutation_set
-from dst.math.stat.distribution import max_deng_entropy_distribution, max_rps_entropy_distribution
+from dstz.element.combination import simple_space, powerset
+from dstz.element.permutation import permutation_set
+from dstz.math.stat.distribution import max_deng_entropy_distribution, max_rps_entropy_distribution
 
 # Generates a simple space of unique elements of specified length.
 ss = simple_space(2)

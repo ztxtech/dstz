@@ -1,4 +1,4 @@
-from dst.core.atom import Item
+from dstz.core.atom import Item
 
 
 class Evidence(dict):

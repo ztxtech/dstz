@@ -1,7 +1,7 @@
-from dst.core.atom import Element
-from dst.core.distribution import Evidence
-from dst.evpiece.dual import disjunctive_rule
-from dst.math.func import pl
+from dstz.core.atom import Element
+from dstz.core.distribution import Evidence
+from dstz.evpiece.dual import disjunctive_rule
+from dstz.math.func import pl
 
 
 def pignistic_probability_transformation(ev):

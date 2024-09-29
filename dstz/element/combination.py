@@ -1,6 +1,6 @@
 from itertools import combinations
 
-from dst.core.atom import Element
+from dstz.core.atom import Element
 
 
 def simple_space(n):

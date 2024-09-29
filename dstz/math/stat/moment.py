@@ -1,6 +1,6 @@
 import math
 
-from dst.element.combination import powerset
+from dstz.element.combination import powerset
 
 
 def high_order_moment(ev, func, order, *args):
