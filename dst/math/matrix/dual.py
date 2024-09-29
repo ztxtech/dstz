@@ -1,10 +1,10 @@
 import numpy as np
 
-from evidence_theory.core.atom import Element
-from evidence_theory.core.distribution import Evidence
-from evidence_theory.evpiece.single import get_fod
-from evidence_theory.math.matrix.const import get_qfrm, get_bfrm
-from evidence_theory.math.matrix.func import get_ones_indices
+from dst.core.atom import Element
+from dst.core.distribution import Evidence
+from dst.evpiece.single import get_fod
+from dst.math.matrix.const import get_qfrm, get_bfrm
+from dst.math.matrix.func import get_ones_indices
 
 
 def matrix_rule(ev1, ev2, matrix, fod, mul=True, curItem=Element):

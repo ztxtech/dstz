@@ -1,6 +1,6 @@
-from evidence_theory.element.combination import simple_space, powerset
-from evidence_theory.element.permutation import permutation_set
-from evidence_theory.math.stat.distribution import max_deng_entropy_distribution, max_rps_entropy_distribution
+from dst.element.combination import simple_space, powerset
+from dst.element.permutation import permutation_set
+from dst.math.stat.distribution import max_deng_entropy_distribution, max_rps_entropy_distribution
 
 # Generates a simple space of unique elements of specified length.
 ss = simple_space(2)

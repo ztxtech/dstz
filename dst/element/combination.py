@@ -1,6 +1,6 @@
 from itertools import combinations
 
-from evidence_theory.core.atom import Element
+from dst.core.atom import Element
 
 
 def simple_space(n):

@@ -1,6 +1,6 @@
 import math
 
-from evidence_theory.element.combination import powerset
+from dst.element.combination import powerset
 
 
 def high_order_moment(ev, func, order, *args):

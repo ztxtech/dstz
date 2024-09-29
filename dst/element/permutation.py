@@ -1,7 +1,7 @@
 import itertools
 from itertools import combinations, permutations
 
-from evidence_theory.core.atom import Element
+from dst.core.atom import Element
 
 
 def permutation_set(simple_space, allow_empty=False):

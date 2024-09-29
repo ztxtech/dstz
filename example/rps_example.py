@@ -1,6 +1,6 @@
-from evidence_theory.core.atom import Element
-from evidence_theory.core.distribution import Evidence
-from evidence_theory.evpiece.dual import rps_left_rule
+from dst.core.atom import Element
+from dst.core.distribution import Evidence
+from dst.evpiece.dual import rps_left_rule
 
 # Create the first evidence instance with a single element and full belief
 ev1 = Evidence({Element((1, 3, 2)): 1.0})

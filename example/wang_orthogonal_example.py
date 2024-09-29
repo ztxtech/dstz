@@ -1,7 +1,7 @@
-from evidence_theory.core.atom import Element
-from evidence_theory.core.distribution import Evidence
+from dst.core.atom import Element
+from dst.core.distribution import Evidence
 # Import the Wang Orthogonal Rule function for combining dual evidence pieces in evidence theory
-from evidence_theory.evpiece.dual import wang_orthogonal_rule
+from dst.evpiece.dual import wang_orthogonal_rule
 
 # Initialize the first piece of evidence
 ev1 = Evidence({

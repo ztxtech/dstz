@@ -1,7 +1,7 @@
-from evidence_theory.core.atom import Element
-from evidence_theory.core.distribution import Evidence
-from evidence_theory.element.combination import simple_space, powerset
-from evidence_theory.element.permutation import permutation_set
+from dst.core.atom import Element
+from dst.core.distribution import Evidence
+from dst.element.combination import simple_space, powerset
+from dst.element.permutation import permutation_set
 
 
 def max_entropy_distribution(n, simple_generator, event_generator,
