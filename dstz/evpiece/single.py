@@ -26,9 +26,9 @@ def pignistic_probability_transformation(ev):
         for simple in key.value:
             s_item = Element(simple)
             if s_item in res:
-                res[Element({s_item})] += ev[key] / len(key.value)
+                res[s_item] += ev[key] / len(key.value)
             else:
-                res[Element({s_item})] = ev[key] / len(key.value)
+                res[s_item] = ev[key] / len(key.value)
     return res
 
 
@@ -54,10 +54,3 @@ def contour_transformation(ev):
     for event in fod:
         res[Element({event})] = pl(Element({event}), ev)
     return res
-
-
-ev = Evidence()
-ev[Element({'a', 'b', 'c'})] = 0.5
-ev[Element({'b', 'c'})] = 0.3
-ev[Element({'a'})] = 0.2
-print(contour_transformation(ev))
