@@ -38,7 +38,7 @@ def ds_rule(ev1, ev2, curItem=Element):
             res[key] += ev1[key1] * ev2[key2]
         else:
             res[key] = ev1[key1] * ev2[key2]
-    empty_mass = res.pop(curItem(set()))
+    empty_mass = res.pop(curItem(set()), None)
     if empty_mass:
         for key in res.keys():
             res[key] = res[key] / (1 - empty_mass)
