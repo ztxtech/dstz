@@ -1,0 +1,57 @@
+site_name: "dstz (Dempster-Shafer Theory \xB7 ztxtech) PyPi package"
+site_description: Documentation for the project
+repo_url: https://github.com/ztxtech/dstz
+repo_name: ztxtech/dstz
+theme:
+  name: material
+  palette:
+    scheme: default
+    primary: indigo
+    accent: indigo
+  font:
+    text: Roboto
+    code: Roboto Mono
+  features:
+  - navigation.tabs
+  - navigation.sections
+  - toc.integrate
+  - navigation.top
+  - search.suggest
+  - search.highlight
+  - content.tabs.link
+nav:
+- Home: index.md
+- API Reference:
+  - Api Overview: api/index.md
+  - Core:
+    - Core Overview: api/core/index.md
+    - Atom: api/core/atom.md
+    - Distribution: api/core/distribution.md
+  - Element:
+    - Element Overview: api/element/index.md
+    - Combination: api/element/combination.md
+    - Permutation: api/element/permutation.md
+  - Evpiece:
+    - Evpiece Overview: api/evpiece/index.md
+    - Dual: api/evpiece/dual.md
+    - Single: api/evpiece/single.md
+  - Math:
+    - Math Overview: api/math/index.md
+    - Func: api/math/func.md
+    - Matrix:
+      - Matrix Overview: api/math/matrix/index.md
+      - Const: api/math/matrix/const.md
+      - Dual: api/math/matrix/dual.md
+      - Func: api/math/matrix/func.md
+    - Stat:
+      - Stat Overview: api/math/stat/index.md
+      - Distribution: api/math/stat/distribution.md
+      - Moment: api/math/stat/moment.md
+plugins:
+- search
+- mkdocstrings:
+    handlers:
+      python:
+        options:
+          show_root_heading: true
+          show_source: true

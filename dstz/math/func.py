@@ -1,18 +1,17 @@
 def pl(element, ev):
-    """
-    Calculates the plausibility function value for a given element in an evidence distribution.
+    """Calculates the plausibility of an element.
+
+    The plausibility function (Pl) measures the total belief that can possibly
+    be attributed to a hypothesis (represented by `element`). It is calculated
+    as the sum of the masses of all focal sets that have a non-empty
+    intersection with the element's value set.
 
     Args:
-        - element (Element): An instance of the Element class representing the element of interest.
-        - ev (Evidence): An instance of the Evidence class representing the evidence distribution.
+        element (Element): The element representing the hypothesis of interest.
+        ev (Evidence): The evidence distribution (mass function).
 
     Returns:
-        float: The plausibility function value for the given element in the evidence distribution.
-
-    Description:
-        The plausibility function, denoted as Pl(A), measures the degree of support for the proposition
-        that the actual state of affairs is included in set A. It is calculated as the sum of the masses
-        assigned to all sets that intersect with A.
+        float: The plausibility value for the given element.
     """
     res = 0
     for key in ev:
@@ -22,20 +21,19 @@ def pl(element, ev):
 
 
 def q(element, ev):
-    """
-    Calculates the commonality function value for a given element in an evidence distribution.
+    """Calculates the commonality function for an element.
+
+    The commonality function (Q) measures the total belief that is committed
+    to a body of evidence that contains the hypothesis (`element`) as a subset.
+    It is calculated as the sum of the masses of all focal sets that are
+    supersets of the element's value set.
 
     Args:
-        - element (Element): An instance of the Element class representing the element of interest.
-        - ev (Evidence): An instance of the Evidence class representing the evidence distribution.
+        element (Element): The element representing the hypothesis of interest.
+        ev (Evidence): The evidence distribution (mass function).
 
     Returns:
-        float: The commonality function value for the given element in the evidence distribution.
-
-    Description:
-        The commonality function, denoted as Q(A), measures the degree of support for the proposition
-        that the actual state of affairs includes set A. It is calculated as the sum of the masses
-        assigned to all sets that contain A.
+        float: The commonality value for the given element.
     """
     res = 0
     for key in ev:
@@ -45,20 +43,19 @@ def q(element, ev):
 
 
 def bel(element, ev):
-    """
-    Calculates the belief function value for a given element in an evidence distribution.
+    """Calculates the belief function for an element.
+
+    The belief function (Bel) measures the total belief that is directly
+    committed to a hypothesis (represented by `element`). It is calculated
+    as the sum of the masses of all focal sets that are subsets of the
+    element's value set.
 
     Args:
-        - element (Element): An instance of the Element class representing the element of interest.
-        - ev (Evidence): An instance of the Evidence class representing the evidence distribution.
+        element (Element): The element representing the hypothesis of interest.
+        ev (Evidence): The evidence distribution (mass function).
 
     Returns:
-        float: The belief function value for the given element in the evidence distribution.
-
-    Description:
-        The belief function, denoted as Bel(A), measures the degree of support for the proposition
-        that the actual state of affairs is contained in set A. It is calculated as the sum of the masses
-        assigned to all sets that are subsets of A.
+        float: The belief value for the given element.
     """
     res = 0
     for key in ev:

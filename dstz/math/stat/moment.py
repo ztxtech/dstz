@@ -4,23 +4,23 @@ from dstz.element.combination import powerset
 
 
 def high_order_moment(ev, func, order, *args):
-    """
-    Calculates the high-order moment of a given function applied to each element-mass pair in an evidence distribution.
+    """Calculates a high-order moment for an evidence distribution.
+
+    This is a generalized function that computes statistical moments. It applies
+    a given function `func` to each element in the evidence distribution,
+    raises the result to the specified `order`, weights it by the element's
+    mass, and sums the results.
 
     Args:
-        - ev (Evidence): An instance of the Evidence class representing the evidence distribution.
-        - func (callable): A function that takes an element and its mass (and possibly additional arguments) and returns a numerical value.
-        - order (int): The order of the moment to calculate.
-        - \*args: Additional arguments to pass to the function `func`.
+        ev (Evidence): The evidence distribution.
+        func (callable): A function that takes an element, its mass, and any
+            additional arguments, and returns a numerical value.
+        order (int): The order of the moment to calculate (e.g., 1 for mean,
+            2 for variance if centered).
+        *args: Additional arguments to pass to `func`.
 
     Returns:
-        float: The high-order moment of the given function applied to the evidence distribution.
-
-    Description:
-        High-order moments are statistical measures that capture the shape of the distribution of a function applied
-        to each element-mass pair in an evidence distribution. The `high_order_moment` function computes this statistic
-        by applying the given function `func` to each element in the distribution, raising the result to the power of `order`,
-        multiplying by the corresponding mass, and summing these values across all elements in the distribution.
+        float: The calculated high-order moment.
     """
     res = 0
     for element, mass in ev.items():
@@ -29,79 +29,78 @@ def high_order_moment(ev, func, order, *args):
 
 
 def deng_entropy(ev):
-    """
-    Calculates the Deng entropy of an evidence distribution.
+    """Calculates the Deng entropy of an evidence distribution.
+
+    Deng entropy is a measure of uncertainty in evidence theory. It is
+    defined as the first-order moment of the information content across all
+    focal elements in the distribution, which is equivalent to the expected
+    value of the information content.
 
     Args:
-        - ev (Evidence): An instance of the Evidence class representing the evidence distribution.
+        ev (Evidence): The evidence distribution.
 
     Returns:
-        float: The Deng entropy of the evidence distribution.
-
-    Description:
-        Deng entropy is a measure of uncertainty in an evidence distribution. It is calculated as the high-order moment
-        of order 1 of the information content function applied to the distribution. This function serves as a specific
-        application of the `high_order_moment` function to calculate entropy.
+        float: The Deng entropy of the distribution.
     """
     return high_order_moment(ev, information_content, 1)
 
 
 def information_var(ev):
-    """
-    Calculates the variance of the central information content in an evidence distribution.
+    """Calculates the variance of the information content.
+
+    This function measures the spread or dispersion of information content
+    across the elements of an evidence distribution. It is calculated as the
+    second-order moment of the *central* information content.
 
     Args:
-        - ev (Evidence): An instance of the Evidence class representing the evidence distribution.
+        ev (Evidence): The evidence distribution.
 
     Returns:
-        float: The variance of the central information content in the evidence distribution.
-
-    Description:
-        The information variance measures the spread of the central information content across the elements of an evidence
-        distribution. It is calculated as the high-order moment of order 2 of the central information content function
-        applied to the distribution. This function also leverages the `high_order_moment` function to compute the variance.
+        float: The variance of the information content.
     """
     return high_order_moment(ev, central_information_content, 2, ev)
 
 
 def information_content(element, mass, event_generator=powerset,
                         component_generator=set):
-    """
-    Calculates the information content associated with an element and its mass in an evidence distribution.
+    """Calculates the information content of a single focal element.
+
+    Information content quantifies the amount of surprise or information
+    conveyed by a piece of evidence. It is calculated based on the belief
+    mass of the element and its cardinality (the number of possible outcomes
+    it contains).
 
     Args:
-        - element (Element): An instance of the Element class representing the element of interest.
-        - mass (float): The mass associated with the given element in the evidence distribution.
+        element (Element): The focal element of interest.
+        mass (float): The belief mass associated with the element.
+        event_generator (callable, optional): A function to generate events
+            from components. Defaults to `powerset`.
+        component_generator (callable, optional): A function to generate
+            components from an element. Defaults to `set`.
 
     Returns:
-        float: The information content of the given element and mass.
-
-    Description:
-        Information content quantifies the amount of information conveyed by an element with a given mass.
-        It is calculated as the negative logarithm (base 2) of the ratio of the mass to the total number
-        of possible combinations minus one. This measure is often used in information theory to assess
-        the informativeness of a particular piece of evidence.
+        float: The information content value.
     """
     return -math.log2(mass / len(event_generator(component_generator(element))))
 
 
 def central_information_content(element, mass, ev):
-    """
-    Calculates the central information content associated with an element and its mass in an evidence distribution.
+    """Calculates the central information content of a focal element.
+
+    The central information content measures how much more or less informative
+    a specific focal element is compared to the average informativeness of the
+    entire evidence distribution. It is calculated by subtracting the mean
+    information content (Deng Entropy) from the element's own information
+    content.
 
     Args:
-        - element (Element): An instance of the Element class representing the element of interest.
-        - mass (float): The mass associated with the given element in the evidence distribution.
-        - ev (Evidence): An instance of the Evidence class representing the evidence distribution.
+        element (Element): The focal element of interest.
+        mass (float): The belief mass associated with the element.
+        ev (Evidence): The entire evidence distribution, used to calculate
+            the mean information content.
 
     Returns:
-        float: The central information content of the given element and mass.
-
-    Description:
-        Central information content adjusts the information content by subtracting the mean information content
-        of the evidence distribution. This measure provides insight into how much more or less informative
-        a particular piece of evidence is compared to the average informativeness of the entire distribution.
-        It uses the high-order moment function to compute the mean information content of the distribution.
+        float: The central information content value.
     """
     center = high_order_moment(ev, information_content, 1)
     return information_content(element, mass) - center

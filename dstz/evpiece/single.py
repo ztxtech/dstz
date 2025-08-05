@@ -5,21 +5,19 @@ from dstz.math.func import pl
 
 
 def pignistic_probability_transformation(ev):
-    """
-    Transforms an evidence distribution into a probability distribution using the Pignistic transformation.
+    """Transforms a belief distribution into a pignistic probability distribution.
+
+    This transformation, often called BetP, converts a belief mass assignment
+    into a classical probability distribution. It does this by distributing the
+    mass of each focal element equally among all the individual (singleton)
+    elements it contains.
 
     Args:
-        - ev (Evidence): An evidence distribution as an instance of the Evidence class.
+        ev (Evidence): An evidence distribution (mass function).
 
     Returns:
-        Evidence: A new evidence distribution transformed into a probability distribution.
-
-    Description:
-        This function implements the Pignistic transformation, which converts an evidence distribution
-        into a probability distribution. Each basic belief assignment (BBA) in the input evidence is
-        distributed uniformly across its focal elements. The result is a probability distribution
-        where each single-element set has a probability equal to the sum of the masses of all BBAs
-        that contain that element divided by the number of elements in those BBAs.
+        Evidence: A new `Evidence` object representing the transformed
+                  probability distribution.
     """
     res = Evidence()
     for key in ev:
@@ -33,6 +31,18 @@ def pignistic_probability_transformation(ev):
 
 
 def get_fod(ev):
+    """Computes the Frame of Discernment (FoD) for an evidence object.
+
+    The Frame of Discernment is the set of all possible outcomes, which is
+    constructed here by collecting all unique singleton elements from all
+    focal sets within the given evidence.
+
+    Args:
+        ev (Evidence): The evidence object.
+
+    Returns:
+        set: A set containing all unique singleton elements in the evidence.
+    """
     res = set()
     for ele in ev.keys():
         for item in ele.value:
@@ -41,6 +51,20 @@ def get_fod(ev):
 
 
 def shafer_discounting(ev, alpha):
+    """Applies Shafer's discounting to an evidence object.
+
+    Discounting reduces the belief assigned to focal sets by a discount rate
+    `alpha`. The total discounted mass is then transferred to the entire
+    Frame of Discernment, representing an increase in overall uncertainty.
+
+    Args:
+        ev (Evidence): The evidence object to be discounted.
+        alpha (float): The discount rate, a value between 0 and 1. `alpha`
+                       represents the degree of trust in the evidence source.
+
+    Returns:
+        Evidence: A new, discounted `Evidence` object.
+    """
     ev_tmp = Evidence()
     ev_tmp[Element(set())] = 1 - alpha
     ev_tmp[Element(get_fod(ev))] = alpha
@@ -49,6 +73,19 @@ def shafer_discounting(ev, alpha):
 
 
 def contour_transformation(ev):
+    """Transforms a belief distribution into a contour function.
+
+    This transformation calculates the plausibility of each individual
+    (singleton) element in the Frame of Discernment. The resulting
+    distribution assigns each singleton element a mass equal to its
+    plausibility value.
+
+    Args:
+        ev (Evidence): The evidence distribution.
+
+    Returns:
+        Evidence: A new `Evidence` object representing the contour function.
+    """
     fod = get_fod(ev)
     res = Evidence()
     for event in fod:
