@@ -1,2 +1,2 @@
-python3 -m build
+python -m build
 twine upload dist/*
