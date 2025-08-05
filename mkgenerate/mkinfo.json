@@ -23,5 +23,11 @@
       "search.highlight",
       "content.tabs.link"
     ]
-  }
+  },
+  "docs_requirements": [
+    "mkdocs",
+    "mkdocs-material",
+    "mkdocstrings[python]",
+    "pyyaml"
+  ]
 }
