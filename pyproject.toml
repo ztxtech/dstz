@@ -1,24 +1,66 @@
+# pyproject.toml
+
+# 1. 构建系统配置 (Build System Configuration)
+#    - 告诉构建工具（如 pip）如何打包你的项目。
 [build-system]
-requires = ["setuptools", "wheel"]
+requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
+# 2. 项目元数据 (Project Metadata)
+#    - 这是关于你的包的核心信息，会展示在 PyPI 上。
 [project]
 name = "dstz"
 version = "0.0.4"
-authors = [{ name = "Tianxiang Zhan", email = "zhantianxianguestc@hotmail.com" }]
-description = "A python package of evidence theory"
+authors = [
+    { name = "Tianxiang Zhan", email = "zhantianxianguestc@hotmail.com" },
+]
+description = "一个轻量、易用的Python证据理论库，专注于Dempster-Shafer理论及其扩展。"
 readme = "README.md"
 requires-python = ">=3.7"
-classifiers = [
-    "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
+license = { file = "LICENSE" } # 明确指出许可证在LICENSE文件中
+
+# 关键词，用于PyPI搜索优化
+keywords = [
+    "evidence theory",
+    "Dempster-Shafer",
+    "belief functions",
+    "information fusion",
+    "uncertainty",
+    "reasoning",
+    "Deng entropy"
 ]
 
-[project.urls]
-homepage = "https://github.com/ztxtech/dstz"
-repository = "https://github.com/ztxtech/dstz.git"
+# PyPI上的分类器，帮助用户发现你的项目
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
 
-# 如果有依赖项，可以在下面添加
-#[project.dependencies]
-#dependency-name = "^version"
+# 项目依赖项
+dependencies = [
+    "numpy",
+]
+
+# 3. 项目链接 (Project URLs)
+#    - 在PyPI侧边栏显示的链接
+[project.urls]
+Homepage = "https://github.com/ztxtech/dstz"
+Repository = "https://github.com/ztxtech/dstz"
+
+
+# 4. Setuptools 工具配置 (Tool Configuration)
+#    - 告诉setuptools如何找到你的包
+[tool.setuptools.packages.find]
+# 自动发现项目根目录下的所有包（即 dstz/ 目录）
+where = ["."]
