@@ -40,17 +40,19 @@ def order_code_intersection(a, b):
     This function identifies elements that are common to both input tuples,
     `a` and `b`. It returns a list of tuples, where each inner tuple
     represents a valid sequence of indices corresponding to the common
-    elements, maintaining the relative order from tuple `a`.
+    elements. The indices are determined by taking the maximum index for each
+    common element from both tuples, and the final result is sorted based on
+    these indices to maintain a combined ordering from both input sequences.
 
     Args:
-        a (tuple): The first ordered tuple. The order of its elements is
-                   preserved in the output.
+        a (tuple): The first ordered tuple.
         b (tuple): The second ordered tuple.
 
     Returns:
         list: A list of tuples, where each inner tuple contains the indices
               of an intersecting element from `a` and `b` respectively. The
-              list is ordered based on the element's position in `a`.
+              list is ordered based on the combined index values from both
+              input tuples.
     """
 
     def swap_key_value(input_dict):
