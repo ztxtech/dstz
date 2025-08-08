@@ -50,25 +50,42 @@ def get_fod(ev):
     return res
 
 
-def shafer_discounting(ev, alpha):
+def shafer_discounting(ev, alpha, fod=None):
     """Applies Shafer's discounting to an evidence object.
 
-    Discounting reduces the belief assigned to focal sets by a discount rate
-    `alpha`. The total discounted mass is then transferred to the entire
-    Frame of Discernment, representing an increase in overall uncertainty.
+    Shafer discounting models partial reliability of an information source by
+    transferring a portion of belief mass from each focal element to the
+    entire Frame of Discernment (representing uncertainty).
+
+    Where alpha represents the degree of trust (1 = fully trusted, 0 = not trusted at all).
 
     Args:
         ev (Evidence): The evidence object to be discounted.
-        alpha (float): The discount rate, a value between 0 and 1. `alpha`
-                       represents the degree of trust in the evidence source.
+        alpha (float): The discount factor, a value between 0 and 1 representing
+                       the degree of trust in the evidence source.
+        fod (set, optional): Precomputed frame of discernment. If None, will be computed.
 
     Returns:
-        Evidence: A new, discounted `Evidence` object.
+        Evidence: A new, discounted `Evidence` object where belief masses have
+                  been adjusted according to the discounting factor.
     """
-    ev_tmp = Evidence()
-    ev_tmp[Element(set())] = 1 - alpha
-    ev_tmp[Element(get_fod(ev))] = alpha
-    res = disjunctive_rule(ev, ev_tmp)
+
+    res = Evidence()
+    # Get Frame of Discernment
+    if not fod:
+        fod = get_fod(ev)
+    fod_element = Element(fod)
+
+    # Apply discounting to each focal element: multiply by trust factor alpha
+    for key, value in ev.items():
+        res[key] = alpha * value
+
+    # Transfer the untrusted portion (1-alpha) to the universal set
+    if fod_element in res:
+        res[fod_element] += (1 - alpha)
+    else:
+        res[fod_element] = (1 - alpha)
+
     return res
 
 
