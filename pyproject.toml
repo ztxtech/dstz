@@ -10,7 +10,7 @@ build-backend = "setuptools.build_meta"
 #    - 这是关于你的包的核心信息，会展示在 PyPI 上。
 [project]
 name = "dstz"
-version = "0.0.4"
+version = "0.0.5.a"
 authors = [
     { name = "Tianxiang Zhan", email = "zhantianxianguestc@hotmail.com" },
 ]

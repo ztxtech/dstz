@@ -1,6 +1,7 @@
+import math
+
 from dstz.core.atom import Element
 from dstz.core.distribution import Evidence
-from dstz.evpiece.dual import disjunctive_rule
 from dstz.math.func import pl
 
 
@@ -107,4 +108,33 @@ def contour_transformation(ev):
     res = Evidence()
     for event in fod:
         res[Element({event})] = pl(Element({event}), ev)
+    return res
+
+
+def temperature_transformation(ev, t):
+    """
+    Apply temperature-based transformation to evidence values.
+    
+    This function performs a temperature scaling operation on evidence values.
+    
+    Args:
+        ev (Evidence): Input evidence object containing key-value pairs where
+                      values represent belief masses for corresponding keys.
+        t (float): Temperature parameter.
+    
+    Returns:
+        Evidence: A new Evidence object with temperature-transformed and
+                 normalized values.
+    """
+    res = Evidence()
+    for key, value in ev.items():
+        # Apply temperature scaling: scale each value by its normalized position
+        # The denominator (2^len(key) - 1) represents the maximum possible value for this key
+        res[key] = math.pow(value / (2 ** len(key) - 1), t) * (2 ** len(key) - 1)
+
+    # Normalize the transformed values to ensure they sum to 1.0
+    norm_factor = sum(res.values())
+    for key, value in res.items():
+        res[key] = value / norm_factor
+
     return res
