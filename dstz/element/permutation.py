@@ -77,6 +77,7 @@ def order_code_intersection(a, b):
         return output_dict
 
     res = {}
+    excluded_samples = set(a).union(set(b)) - set(a).intersection(set(b))
 
     # Map each element in 'a' to a list of its indices
     for idx, sample in enumerate(a):
@@ -95,6 +96,10 @@ def order_code_intersection(a, b):
     # For each element, keep only the maximum index
     for sample in res.keys():
         res[sample] = max(res[sample])
+
+    for sample in excluded_samples:
+        if sample in res:
+            res.pop(sample)
 
     # Invert the dictionary to group elements by index
     res = swap_key_value(res)
