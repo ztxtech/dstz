@@ -98,8 +98,9 @@ def main():
         help="配置 (mkinfo.json) 文件的路径。\n默认: %(default)s"
     )
     parser.add_argument(
-        "--readme", type=str, default=script_dir / 'readme.md',
-        help="用作文档首页的 Markdown (readme.md) 文件的路径。\n默认: %(default)s"
+        # README 位于仓库根目录（与 pyproject.toml 的 readme 字段一致），不在 mkgenerate/ 下。
+        "--readme", type=str, default=script_dir.parent / 'README.md',
+        help="用作文档首页的 Markdown (README.md) 文件的路径。\n默认: %(default)s"
     )
     parser.add_argument(
         "-o", "--output_dir", type=str, default=script_dir / 'out',

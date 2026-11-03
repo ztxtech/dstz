@@ -1,0 +1,64 @@
+name: ci
+
+# 持续集成：所有推送到 main 的提交与 PR 都跑一遍测试和发行包校验。
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: 测试 (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.11", "3.13"]
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 准备 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: 安装依赖
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy pytest
+
+      - name: 运行测试
+        run: python -m pytest
+
+  package:
+    name: 发行包校验
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 准备 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: 安装构建工具
+        run: python -m pip install --upgrade build twine
+
+      - name: 构建 sdist 与 wheel
+        run: python -m build
+
+      - name: 校验元数据
+        run: python -m twine check --strict dist/*
+
+      - name: 安装 wheel 并验证可导入
+        run: |
+          python -m pip install --force-reinstall dist/*.whl
+          cd /tmp && python -c "import dstz; print(dstz.__file__)"

@@ -1,0 +1,121 @@
+name: publish
+
+# 发布流程：从 GitHub 直接发布到 PyPI，本地不保存任何 PyPI 凭据。
+#
+# 触发方式：
+#   1. 推送符合 vX.Y.Z 的标签，例如 `git tag v0.0.7 && git push origin v0.0.7`：
+#      构建 -> 校验 -> 发布到 PyPI（版本号必须与 pyproject.toml 一致）。
+#   2. 手动触发 workflow_dispatch，可先投递 TestPyPI 演练整条链路。
+#
+# 鉴权使用 PyPI 的 trusted publishing（OIDC 短期凭证，id-token），
+# 需要在 PyPI 项目设置里登记仓库、工作流文件名与 environment 名称，
+# 详见 README「发布」一节。
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 发布目标
+        type: choice
+        options: ["testpypi", "pypi"]
+        default: "testpypi"
+
+# 同一标签的发布任务不并发，避免重复上传。
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: 构建并校验发行包
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 准备 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: 安装构建工具
+        run: python -m pip install --upgrade build twine
+
+      - name: 校验标签与 pyproject 版本一致
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          version=$(python - <<'EOF'
+          import pathlib
+          import tomllib
+
+          data = tomllib.loads(pathlib.Path("pyproject.toml").read_text(encoding="utf-8"))
+          print(data["project"]["version"])
+          EOF
+          )
+          tag="${GITHUB_REF_NAME#v}"
+          if [ "$version" != "$tag" ]; then
+            echo "标签 $GITHUB_REF_NAME 与 pyproject.toml 版本 $version 不一致，拒绝发布" >&2
+            exit 1
+          fi
+          echo "版本一致性校验通过：$version"
+
+      - name: 构建 sdist 与 wheel
+        run: python -m build
+
+      - name: 校验发行包元数据
+        run: python -m twine check --strict dist/*
+
+      - name: 归档发行包
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          if-no-files-found: error
+
+  publish-pypi:
+    name: 发布到 PyPI
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v') || github.event.inputs.target == 'pypi'
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/dstz
+    permissions:
+      id-token: write  # trusted publishing 所需的 OIDC 令牌
+    steps:
+      - name: 下载发行包
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: 上传到 PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+
+  publish-testpypi:
+    name: 发布到 TestPyPI
+    needs: build
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.target == 'testpypi'
+    runs-on: ubuntu-latest
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/dstz
+    permissions:
+      id-token: write
+    steps:
+      - name: 下载发行包
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: 上传到 TestPyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/

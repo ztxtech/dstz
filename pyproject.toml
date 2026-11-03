@@ -1,13 +1,14 @@
-# pyproject.toml
+# pyproject.toml —— 打包与元数据配置。
+#
+# 发布链路：本地只做 `python -m build` + `twine check` 预检（见 build.sh），
+# 正式上传由 GitHub Actions 完成（.github/workflows/publish.yml），
+# 通过 PyPI trusted publishing（OIDC）上传，仓库与本地都不保存 PyPI token。
 
-# 1. 构建系统配置 (Build System Configuration)
-#    - 告诉构建工具（如 pip）如何打包你的项目。
 [build-system]
-requires = ["setuptools>=61.0", "wheel"]
+# PEP 639 的 SPDX 许可证表达式需要 setuptools>=77。
+requires = ["setuptools>=77.0.3"]
 build-backend = "setuptools.build_meta"
 
-# 2. 项目元数据 (Project Metadata)
-#    - 这是关于你的包的核心信息，会展示在 PyPI 上。
 [project]
 name = "dstz"
 version = "0.0.7"
@@ -16,10 +17,12 @@ authors = [
 ]
 description = "一个轻量、易用的Python证据理论库，专注于Dempster-Shafer理论及其扩展。"
 readme = "README.md"
-requires-python = ">=3.7"
-license = { file = "LICENSE" } # 明确指出许可证在LICENSE文件中
+# 3.7 / 3.8 已停止维护；CI 覆盖 3.9–3.13。
+requires-python = ">=3.9"
+license = "MIT"
+license-files = ["LICENSE"]
 
-# 关键词，用于PyPI搜索优化
+# 关键词，用于 PyPI 搜索优化。
 keywords = [
     "evidence theory",
     "Dempster-Shafer",
@@ -27,19 +30,19 @@ keywords = [
     "information fusion",
     "uncertainty",
     "reasoning",
-    "Deng entropy"
+    "Deng entropy",
+    "random permutation set",
 ]
 
-# PyPI上的分类器，帮助用户发现你的项目
+# PyPI 分类器，帮助用户发现项目。许可证改用 SPDX 表达式后不再重复声明许可证分类器。
 classifiers = [
     "Development Status :: 4 - Beta",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
-    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Operating System :: OS Independent",
     "Intended Audience :: Developers",
     "Intended Audience :: Science/Research",
@@ -47,20 +50,25 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 
-# 项目依赖项
+# 运行时依赖。
 dependencies = [
     "numpy",
 ]
 
-# 3. 项目链接 (Project URLs)
-#    - 在PyPI侧边栏显示的链接
+# 项目链接，显示在 PyPI 侧边栏。
 [project.urls]
 Homepage = "https://github.com/ztxtech/dstz"
 Repository = "https://github.com/ztxtech/dstz"
+Issues = "https://github.com/ztxtech/dstz/issues"
+Documentation = "https://dstz.readthedocs.io/"
+Releases = "https://github.com/ztxtech/dstz/releases"
 
-
-# 4. Setuptools 工具配置 (Tool Configuration)
-#    - 告诉setuptools如何找到你的包
+# 包发现：只收集 dstz 包，排除 example、docs 等非包目录。
 [tool.setuptools.packages.find]
-# 自动发现项目根目录下的所有包（即 dstz/ 目录）
 where = ["."]
+include = ["dstz*"]
+
+# pytest 只收集 tests/ 目录。
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

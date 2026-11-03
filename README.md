@@ -2,11 +2,11 @@
 
 ![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-green)
 [![Python](https://img.shields.io/badge/PyPI-3670A0?logo=PyPI&logoColor=ffdd54)](https://pypi.org/project/dstz/)
-[![Python Version](https://img.shields.io/badge/python-%3E%3D3.7-blue.svg)](https://www.python.org/downloads/)
+[![Python Version](https://img.shields.io/badge/python-%3E%3D3.9-blue.svg)](https://www.python.org/downloads/)
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![GitHub Repository](https://img.shields.io/badge/repository-GitHub-blue.svg)](https://github.com/ztxtech/dstz)
 [![GitHub Issues](https://img.shields.io/github/issues/ztxtech/dstz.svg)](https://github.com/ztxtech/dstz/issues)
-[![Documentation Status](https://readthedocs.org/projects/dst/badge/?version=latest)](https://dst.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/dstz/badge/?version=latest)](https://dstz.readthedocs.io/en/latest/?badge=latest)
 
 ## 简介
 
@@ -20,7 +20,20 @@
 pip install dstz
 ```
 
+要求 Python >= 3.9。
+
 ## 例子
+
+仓库中的示例脚本用模块方式运行，例如：
+
+```bash
+git clone https://github.com/ztxtech/dstz.git
+cd dstz
+pip install -e .
+python -m example.space_example
+```
+
+直接运行 `python example/space_example.py` 会因为包路径不在 `sys.path` 上而报 `ModuleNotFoundError`，请始终用 `python -m example.<脚本名>`。
 
 - 见[`./example/conflict_example.py`](https://github.com/ztxtech/dstz/blob/main/example/conflict_example.py)
   中实现了一个经典的证据冲突的融合。
@@ -29,7 +42,7 @@ pip install dstz
 - 见[`./example/moment.py`](https://github.com/ztxtech/dstz/blob/main/example/moment.py)
   中实现了一个计算证据对应的矩的例子。
 - 见[`./example/space_example.py`](https://github.com/ztxtech/dstz/blob/main/example/space_example.py)
-  中实现了一个计算证据对应的矩的例子。
+  中实现了辨识框架的幂集与排列集构造，以及对应的最大熵分布。
 - 见[`./example/rps_example.py`](https://github.com/ztxtech/dstz/blob/main/example/rps_example.py)
   中实现了随机排列集左交融合的例子。
 - 见[`./example/wang_orthogonal_example.py`](https://github.com/ztxtech/dstz/blob/main/example/wang_orthogonal_example.py)
@@ -39,6 +52,29 @@ pip install dstz
 ## 文档
 
 完整的[API文档](https://dstz.readthedocs.io/)和使用指南可在项目主页上找到。
+
+## 发布
+
+发行包从 GitHub 直接发布到 PyPI，本地与仓库都不保存 PyPI token，鉴权使用 PyPI 的 trusted publishing（OIDC 短期令牌）：
+
+1. 一次性配置（在 PyPI 完成）：在 dstz 项目的 Publishing settings 里添加 pending publisher，
+   指定仓库 `ztxtech/dstz`、工作流 `publish.yml`、environment `pypi`；
+   TestPyPI 同理，环境名为 `testpypi`。GitHub 侧在仓库 Settings → Environments
+   创建同名 environment（可按需要加审批人）。
+2. 本地预检（可选）：`sh ./build.sh`，只做清理、打包和 `twine check --strict`，不上传。
+3. 正式发布：把 `pyproject.toml` 里的 `version` 改成目标版本号并提交，
+   然后打标签推送：
+
+   ```bash
+   git tag v0.0.8
+   git push origin v0.0.8
+   ```
+
+   CI 会先校验标签与 `pyproject.toml` 版本一致，再构建、校验并发布到 PyPI。
+4. 想先演练整条链路：在 Actions 里手动运行 `publish` 工作流，`target` 选
+   `testpypi`，产物投递到 TestPyPI。
+
+每次推送标签都会同时构建 sdist 与 wheel；PR 与推送到 main 的提交由 `ci` 工作流跑测试并校验发行包。
 
 ## 支持与交流
 
