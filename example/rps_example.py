@@ -1,21 +1,25 @@
+"""随机置换集（RPS）左正交规则的示例。
+
+RPS 中 `Element` 的值是有序元组，顺序参与语义，因此正交和要按“有序交”计算。
+`rps_left_rule` 以左证据的元素顺序为准取交，这里 `(1, 3, 2)` 与 `(2, 3)` 的有序交为
+`(3, 2)`：`3` 在两者中同序，`2` 在左侧位于 `3` 之后。
+
+预期输出（`python -m example.rps_example`）：:
+
+    {(3, 2): 1.0}
+"""
+
 from dstz.core.atom import Element
 from dstz.core.distribution import Evidence
 from dstz.evpiece.dual import rps_left_rule
 
-# Create the first evidence instance with a single element and full belief
+# 恰好一条命题 (1, 3, 2)，质量为 1：对“顺序为 1-3-2”绝对确信
 ev1 = Evidence({Element((1, 3, 2)): 1.0})
-# This represents a scenario where there is absolute belief in the event containing elements 1, 3, and 2.
 
-# Create the second evidence instance with another single element and full belief
+# 恰好一条命题 (2, 3)，质量为 1：对“顺序为 2-3”绝对确信
 ev2 = Evidence({Element((2, 3)): 1.0})
-# This represents a scenario with absolute belief in the event containing elements 2 and 3.
 
-# Apply the RPS Left-Rule to combine the two evidence instances
+# 左正交规则取有序交并校验两边的排列次序，结果的质量仍为 1
 combined_ev = rps_left_rule(ev1, ev2)
-# The RPS Left-Rule combines the evidence by computing intersections of events (as per the RPS theory)
-# and updating the belief accordingly, respecting the principles of evidence combination.
 
-# Print the resulting combined evidence distribution
 print(combined_ev)
-# The output will show the new Evidence object after the combination, reflecting how the beliefs
-# about the events have been updated given the information from both ev1 and ev2.
