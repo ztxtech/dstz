@@ -62,3 +62,27 @@ jobs:
         run: |
           python -m pip install --force-reinstall dist/*.whl
           cd /tmp && python -c "import dstz; print(dstz.__file__)"
+
+  docs:
+    name: 构建文档
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v7
+
+      - name: 准备 Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: |
+            docs/requirements.txt
+            pyproject.toml
+
+      - name: 安装项目与文档依赖
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e . -r docs/requirements.txt
+
+      - name: 构建 MkDocs 文档
+        run: python -m mkdocs build
