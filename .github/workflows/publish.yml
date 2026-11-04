@@ -36,10 +36,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 检出代码
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: 准备 Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.12"
           cache: pip
@@ -72,7 +72,7 @@ jobs:
         run: python -m twine check --strict dist/*
 
       - name: 归档发行包
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: dist
           path: dist/
@@ -90,7 +90,7 @@ jobs:
       id-token: write  # trusted publishing 所需的 OIDC 令牌
     steps:
       - name: 下载发行包
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: dist
           path: dist/
@@ -110,7 +110,7 @@ jobs:
       id-token: write
     steps:
       - name: 下载发行包
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: dist
           path: dist/
